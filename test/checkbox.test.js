@@ -1,5 +1,5 @@
-import assert from 'assert'
-import settingsBill from '../settings-bill.js'
+import assert from 'assert';
+import settingsBill from '../settings-bill.js';
 
 describe("The checkbox function ",()=>{
     let bill = settingsBill()
