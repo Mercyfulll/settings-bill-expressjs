@@ -1,3 +1,5 @@
+import moment from "moment"
+
 export default function settingsBill(){
     var smsCost = 0
     var callCost = 0
@@ -37,12 +39,19 @@ export default function settingsBill(){
         else if (action === 'call'){
         cost = callCost;
         }
-
+        if (cost > 0)
         actionList.push({
             type: action,
             cost,
             timestamp: new Date()
         })
+    }
+    function ago(){
+        for (let i = 0; i < actionList.length; i++) {
+            let when = moment(actionList[i].timestamp).fromNow() 
+        }
+            return when
+
     }
     // function getTotal(){
     //     total = smsCost + callCost
@@ -97,12 +106,12 @@ export default function settingsBill(){
     }
 
     function totals() {
-        let smsTotal = getTotal('sms')
-        let callTotal = getTotal('call')
+        let smsTotal = getTotal('sms').toFixed(2)
+        let callTotal = getTotal('call').toFixed(2)
         return {
             smsTotal,
             callTotal,
-            grandTotal : grandTotal()
+            grandTotal : grandTotal().toFixed(2)
         }
     }
 
@@ -176,6 +185,7 @@ export default function settingsBill(){
     }
 
     return{
+        ago,
         setCosts,
         getCosts,
         checkbox,
