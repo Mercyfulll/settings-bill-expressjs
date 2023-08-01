@@ -47,10 +47,12 @@ export default function settingsBill(){
         })
     }
     function ago(){
+        let timeList = []
         for (let i = 0; i < actionList.length; i++) {
-            let when = moment(actionList[i].timestamp).fromNow() 
+             time = moment(actionList[i].timestamp).fromNow() 
+             timeList.push(time)
+             return timeList
         }
-            return when
 
     }
     // function getTotal(){
@@ -79,7 +81,7 @@ export default function settingsBill(){
 
         // return actionList.filter((action) => action.type === type);
     }
-
+    
     function getTotal(type) {
         let total = 0;
         // loop through all the entries in the action list 
