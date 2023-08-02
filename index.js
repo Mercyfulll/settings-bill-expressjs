@@ -17,7 +17,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.get("/", function (req, res) {
+// function to update the levels and use the next middleware to render
+function updateLevels(req, res, next) {
+  const hasReachedWarningLevel = settingBill.hasReachedWarningLevel();
+  const hasReachedCriticalLevel = settingBill.hasReachedCriticalLevel();
+  res.locals.hasReachedWarningLevel = hasReachedWarningLevel;
+  res.locals.hasReachedCriticalLevel = hasReachedCriticalLevel;
+  next();
+}
+
+
+app.get("/", updateLevels, function (req, res) {
     res.render("index", {
         amount: settingBill.getCosts(),
         totals: settingBill.totals(),
@@ -40,7 +50,8 @@ app.post("/settings", function (req, res) {
 })
 
 app.post("/action", function (req, res) {
-
+    const hasReachedCriticalLevel = settingBill.hasReachedCriticalLevel()
+    if(!hasReachedCriticalLevel)
     settingBill.checkbox(req.body.actionType)
     res.redirect("/")
 })

@@ -45,10 +45,13 @@
                 <td>R<span class="smsTotalSettings">{{totals.smsTotal}}</span> </td>
               </tr>
               <tr>
-                <td>
+                <td class="{{#if hasReachedWarningLevel}}warning{{else}}{{#if hasReachedCriticalLevel}}danger{{/if}}{{/if}}">
                   <a href="/actions">Total</a>
                 </td>
-                <td> R<span class="totalSettings">{{totals.grandTotal}}</span> </td>
+                <td>
+                   R<span class="totalSetting {{#if hasReachedWarningLevel}}warning{{else}}{{#if hasReachedCriticalLevel}}danger{{/if}}{{/if}}">{{totals.grandTotal}}</span>
+                </td>
+                
               </tr>
             </table>
 
