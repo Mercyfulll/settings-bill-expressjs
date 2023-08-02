@@ -58,8 +58,8 @@ app.get("/actions/:actionType", function (req, res) {
     const actionedList = settingBill.actionsFor(actionType)
 
     const relativeTime = actionedList.forEach((list) => {
-        //  listActioned = moment(actionsList.timestamp).fromNow()
-        list.timestamp = moment(list.timestamp).fromNow()
+        
+        list.timestamp = moment().startOf('hour').fromNow()
 
     })
 
